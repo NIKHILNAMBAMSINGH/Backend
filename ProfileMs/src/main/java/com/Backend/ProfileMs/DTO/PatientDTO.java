@@ -23,7 +23,7 @@ public class PatientDTO {
     private String addarNo;
     private BloodGroup bloodGroup;
 
-    public Patient toPatientDTO(){
+    public Patient toPatient(){
         return new Patient
                 (this.id,this.name,this.email,this.dob,this.phone,this.address,this.addarNo,this.bloodGroup);
     }
