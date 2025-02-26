@@ -30,7 +30,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(request -> "SECRET".equals(request.getHeader("X-Secret-Key"))).permitAll()
                         .anyRequest().denyAll()
-                );
+                )
+        ;
 
         return http.build();
     }

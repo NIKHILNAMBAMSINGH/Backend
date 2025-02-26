@@ -26,10 +26,5 @@ public class DoctorDTO {
     private String department;
     private String totalExp;
 
-    public Doctor toDoctor(){
-        return new Doctor
-                (this.id,this.name,this.email,this.dob,this.phone,
-                        this.address,this.licenseNo,this.specialization,this.department,
-                        this.totalExp);
-    }
+
 }

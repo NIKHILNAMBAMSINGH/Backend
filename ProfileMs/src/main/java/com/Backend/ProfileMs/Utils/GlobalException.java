@@ -1,5 +1,6 @@
 package com.Backend.ProfileMs.Utils;
 
+import com.Backend.ProfileMs.Exception.HsException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
