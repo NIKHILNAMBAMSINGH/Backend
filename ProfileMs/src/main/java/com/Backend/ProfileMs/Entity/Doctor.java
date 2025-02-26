@@ -32,7 +32,7 @@ public class Doctor {
     private String totalExp;
     public DoctorDTO toDoctorDTO(){
         return new DoctorDTO
-                (this.id,this.name,this.email,this.dob,this.phone,
+                (this.name,this.email,this.dob,this.phone,
                         this.address,this.licenseNo,this.specialization,this.department,
                         this.totalExp);
     }

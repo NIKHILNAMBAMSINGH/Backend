@@ -29,8 +29,7 @@ public class Patient {
     @Column(unique = true)
     private String addarNo;
     private BloodGroup bloodGroup;
-    public PatientDTO toPatientDTO(){
-        return new PatientDTO
-                (this.id,this.name,this.email,this.dob,this.phone,this.address,this.addarNo,this.bloodGroup);
-    }
+    private String allergies;
+    private String chronicDiseas;
+
 }

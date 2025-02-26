@@ -1,6 +1,7 @@
 package com.HMS.User.Service.Jwt;
 
 import com.HMS.User.Service.DTO.UserDTO;
+import com.HMS.User.Service.Entity.User;
 import com.HMS.User.Service.Exception.HsException;
 import com.HMS.User.Service.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +19,13 @@ public class MyUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         try {
             System.out.println("🚀 Fetching user from database: " + email);
-            UserDTO userDTO=userService.getUser(email);
+            User user=userService.getUser(email);
             CustomUserDetails customUserDetails=new CustomUserDetails();
-            customUserDetails.setId(userDTO.getId());
-            customUserDetails.setUsername(userDTO.getName());
-            customUserDetails.setPassword(userDTO.getPassword());
-            customUserDetails.setEmail(userDTO.getEmail());
-            customUserDetails.setRole(userDTO.getRole());
+            customUserDetails.setId(user.getId());
+            customUserDetails.setUsername(user.getName());
+            customUserDetails.setPassword(user.getPassword());
+            customUserDetails.setEmail(user.getEmail());
+            customUserDetails.setRole(user.getRole());
             customUserDetails.setAuthorities(null);
             return customUserDetails;
         } catch (HsException e) {

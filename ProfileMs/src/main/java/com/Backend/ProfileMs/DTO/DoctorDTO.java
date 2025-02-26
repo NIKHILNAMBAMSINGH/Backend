@@ -15,7 +15,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DoctorDTO {
-    private Long id;
     private String name;
     private String email;
     private LocalDate dob;
@@ -25,6 +24,4 @@ public class DoctorDTO {
     private String specialization;
     private String department;
     private String totalExp;
-
-
 }

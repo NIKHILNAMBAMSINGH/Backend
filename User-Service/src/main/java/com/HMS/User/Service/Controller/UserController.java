@@ -51,7 +51,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?>registerUser(@Valid @RequestBody UserDTO userDTO) throws HsException {
-        userService.registerUser(userDTO);
+            userService.registerUser(userDTO);
         Map<String,Object>response=new HashMap<>();
         response.put("status", 1);
         response.put("message","Created User");

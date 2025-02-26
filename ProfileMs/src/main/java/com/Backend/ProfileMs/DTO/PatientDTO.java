@@ -14,7 +14,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PatientDTO {
-    private Long id;
     private String name;
     private String email;
     private LocalDate dob;
@@ -22,10 +21,7 @@ public class PatientDTO {
     private String address;
     private String addarNo;
     private BloodGroup bloodGroup;
-
-    public Patient toPatient(){
-        return new Patient
-                (this.id,this.name,this.email,this.dob,this.phone,this.address,this.addarNo,this.bloodGroup);
-    }
+    private String allergies;
+    private String chronicDiseas;
 
 }
