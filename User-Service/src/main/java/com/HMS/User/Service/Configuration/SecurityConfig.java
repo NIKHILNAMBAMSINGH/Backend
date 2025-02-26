@@ -27,20 +27,19 @@ public class SecurityConfig {
     AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
-                // Remove this line
-                // .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/user/register", "/user/login","/user/getData").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers(request -> "SECRET".equals(request.getHeader("X-Secret-Key"))).permitAll().
+                        requestMatchers("/actuator/**","/favicon.ico" ).permitAll()
+                        .anyRequest().denyAll()
                 );
 
         return http.build();
     }
-    }
+}
 
 
