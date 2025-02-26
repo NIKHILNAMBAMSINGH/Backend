@@ -33,7 +33,8 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(request -> "SECRET".equals(request.getHeader("X-Secret-Key"))).permitAll()
+                        .requestMatchers(request -> "SECRET".equals(request.getHeader("X-Secret-Key"))).permitAll().
+                        requestMatchers("/actuator/**","/favicon.ico" ).permitAll()
                         .anyRequest().denyAll()
                 );
 
