@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PatientDTO {
+    private Long id;
     private String name;
     private String email;
     private LocalDate dob;
