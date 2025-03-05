@@ -7,7 +7,10 @@ import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ServerWebExchange;
+import reactor.core.publisher.Mono;
 
 import javax.crypto.SecretKey;
 import java.io.ObjectInputFilter;
@@ -35,10 +38,11 @@ public class TokenFilter extends AbstractGatewayFilterFactory<TokenFilter.Config
             }
 
             HttpHeaders headers = exchange.getRequest().getHeaders();
-
+            String authorizationHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+            System.out.println("Received Authorization header: " + authorizationHeader);
             // Validate Authorization header
             if (!headers.containsKey(HttpHeaders.AUTHORIZATION)) {
-                throw new RuntimeException("Authorization header is missing");
+                return unauthorizedResponse(exchange); // Ha
             }
 
             String authHeader = headers.getFirst(HttpHeaders.AUTHORIZATION);
@@ -52,6 +56,7 @@ public class TokenFilter extends AbstractGatewayFilterFactory<TokenFilter.Config
                 // Validate JWT token
                 Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
                 exchange=exchange.mutate().request(r->r.header("X-Secret-Key","SECRET")).build();
+                System.out.println("Key added");
                 // Token is valid, continue request
                 return chain.filter(exchange);
             } catch (Exception e) {
@@ -59,7 +64,11 @@ public class TokenFilter extends AbstractGatewayFilterFactory<TokenFilter.Config
             }
         };
     }
-
+    private Mono<Void> unauthorizedResponse(ServerWebExchange exchange) {
+        ServerHttpResponse response = exchange.getResponse();
+        response.setStatusCode(HttpStatus.UNAUTHORIZED);
+        return response.setComplete();
+    }
     // Method to send a 401 Unauthorized response
 
     public static class Config {

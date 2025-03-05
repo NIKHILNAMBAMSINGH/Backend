@@ -26,6 +26,7 @@ public class MyUserDetailsService implements UserDetailsService {
             customUserDetails.setPassword(user.getPassword());
             customUserDetails.setEmail(user.getEmail());
             customUserDetails.setRole(user.getRole());
+            customUserDetails.setProfileId(user.getProfileId());
             customUserDetails.setAuthorities(null);
             return customUserDetails;
         } catch (HsException e) {

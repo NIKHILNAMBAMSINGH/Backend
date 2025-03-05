@@ -92,6 +92,7 @@ public class UserServiceImpl implements UserService {
         dbUser.setRole(userOptional.get().getRole());
         dbUser.setPassword(userOptional.get().getPassword());
         dbUser.setName(userOptional.get().getName());
+        dbUser.setProfileId(userOptional.get().getProfileId());
         return dbUser;
     }
 }

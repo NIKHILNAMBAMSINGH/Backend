@@ -23,6 +23,7 @@ public class JwtUtils {
         claims.put("email",customUserDetails.getEmail());
         claims.put("role",customUserDetails.getRole());
         claims.put("name",customUserDetails.getUsername());
+        claims.put("profileId",customUserDetails.getProfileId());
         System.out.println("Claims: " + claims);
         return doGenerateToken(claims, customUserDetails.getEmail());
 
