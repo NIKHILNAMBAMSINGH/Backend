@@ -46,6 +46,7 @@ public class PatientServiceImpl implements PatientService {
         Optional<Patient> patientOptional=patientRepository.findById(id);
         Patient patient=patientOptional.get();
         PatientDTO patientDTO = new PatientDTO();
+        patientDTO.setId(patient.getId());
         patientDTO.setName(patient.getName());
         patientDTO.setEmail(patient.getEmail());
         patientDTO.setDob(patient.getDob());

@@ -6,9 +6,11 @@ import com.Backend.ProfileMs.Entity.Doctor;
 import com.Backend.ProfileMs.Exception.HsException;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 public interface DoctorService {
     public Long addDoctor(DoctorDTO doctorDTO)throws HsException;
-    public DoctorDTO getDoctorById(Long id) throws HsException;
+    public Map<String, Object> getDoctorById(Long id) throws HsException;
 
     DoctorDTO updateDoctor(DoctorDTO doctorDTO) throws HsException;
 }

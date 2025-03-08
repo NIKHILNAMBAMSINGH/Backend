@@ -10,7 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.*;
 
 @Service
 public class DoctorServiceImpl implements DoctorService {
@@ -48,10 +49,30 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public DoctorDTO getDoctorById(Long id) throws HsException {
+    public Map<String, Object> getDoctorById(Long id) throws HsException {
         Optional<Doctor> doctorOptional= doctorRepository.findById(id);
        DoctorDTO doctorDTO=doctorOptional.get().toDoctorDTO();
-        return doctorDTO;
+
+        if (!doctorOptional.isPresent()) {
+            throw new HsException("Doctor not found with id: " + id);
+        }
+
+        Doctor doctor = doctorOptional.get();
+
+        Map<String, Object> doctorDetailsMap = new LinkedHashMap<>();
+        doctorDetailsMap.put("id", doctor.getId());
+        doctorDetailsMap.put("name", doctor.getName());
+        doctorDetailsMap.put("email", doctor.getEmail());
+        doctorDetailsMap.put("dob", doctor.getDob());
+        doctorDetailsMap.put("phone", doctor.getPhone());
+        doctorDetailsMap.put("address", doctor.getAddress());
+        doctorDetailsMap.put("licenseN", doctor.getLicenseNo());
+        doctorDetailsMap.put("specializatio", doctor.getSpecialization());
+        doctorDetailsMap.put("department", doctor.getDepartment());
+        doctorDetailsMap.put("totalExp", doctor.getTotalExp());
+
+
+        return doctorDetailsMap;
     }
 
     @Override

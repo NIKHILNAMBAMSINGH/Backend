@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/profile/doctor")
 public class DoctorController {
@@ -26,7 +28,7 @@ public class DoctorController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<DoctorDTO>getDoctorById(@PathVariable Long id) throws HsException {
+    public ResponseEntity<Map<String, Object>>getDoctorById(@PathVariable Long id) throws HsException {
         return new ResponseEntity<>(doctorService.getDoctorById(id),HttpStatus.OK);
     }
 
